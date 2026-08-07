@@ -1,11 +1,13 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 
+
+
 export const protect = async (req, res, next) => {
   let token;
 
-  if (req.headers.authorization) {
-    token = req.headers.authorization;
+  if (req.headers.token) {
+    token = req.headers.token;
   }
 
   if (!token) {
@@ -26,7 +28,6 @@ export const protect = async (req, res, next) => {
     });
   }
 };
-
 export const authorize = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
