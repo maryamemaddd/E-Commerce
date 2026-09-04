@@ -27,13 +27,11 @@ export const getProducts = async (req, res) => {
       ];
     }
 
-    // جلب كل المنتجات المطابقة للبحث بدون skip أو limit
     const products = await Product.find(query).sort(sort).lean();
 
-    // 💡 تجهيز حقل image مباشر ورئيسي لكل منتج
     const formattedProducts = products.map((product) => ({
       ...product,
-      image: product.images?.[0]?.url || 'https://via.placeholder.com/300'
+      image: product.images?.[0]?.url 
     }));
 
     res.status(200).json({
